@@ -1,0 +1,10 @@
+<h1><%= @goal.title %></h1>
+
+<div>
+	<%= @goal.body %>
+</div>
+
+<% if @goal.author_id == current_user.id %>
+	<%= button_to "Edit Goal", edit_goal_url(@goal), :method => :get %>
+	<%= button_to "Delete Goal", goal_url(@goal), :method => :delete %>
+<% end %>

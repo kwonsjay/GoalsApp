@@ -10,7 +10,7 @@ describe "goal operations" do
 
     click_button('Create Goal')
     fill_in('Title', :with => 'Feed my cat')
-    fill_in('Body', :with => 'Happy cats make me happy')
+    fill_in('Description', :with => 'Happy cats make me happy')
     click_button("Let's do this!")
 
   end
@@ -20,14 +20,16 @@ describe "goal operations" do
   end
 
   it "updates goals" do
-    click_button('Update Goal')
+    click_link("Feed my cat")
+    click_button('Edit Goal')
     fill_in('Title', :with => 'Feed my cat again')
-    fill_in('Body', :with => 'Happy cats make me happy perpetually')
-    click_button("Let's do this!")
+    fill_in('Description', :with => 'Happy cats make me happy perpetually')
+    click_button("Update Goal")
     expect(page).to have_content("Feed my cat again")
   end
 
   it "deletes goals" do
+    click_link("Feed my cat")
     click_button('Delete Goal')
     page.should_not have_content("Feed my cat")
   end
@@ -45,7 +47,7 @@ describe "it lists goals on user show page" do
 
     click_button('Create Goal')
     fill_in('Title', :with => 'Pet my cat')
-    fill_in('Body', :with => 'Purring cats make me happy')
+    fill_in('Description', :with => 'Purring cats make me happy')
     check('Private')
     click_button("Let's do this!")
     click_button("Sign Out")
@@ -57,7 +59,7 @@ describe "it lists goals on user show page" do
 
     click_button('Create Goal')
     fill_in('Title', :with => 'Feed my cat')
-    fill_in('Body', :with => 'Happy cats make me happy')
+    fill_in('Description', :with => 'Happy cats make me happy')
     check('Private')
     click_button("Let's do this!")
   end

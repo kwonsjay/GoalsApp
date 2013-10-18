@@ -4,7 +4,15 @@ class User < ActiveRecord::Base
   before_validation :ensure_session_token!
 
   validates :username, :session_token, :presence => true
+  validates :username, :uniqueness => true
   validates :password_digest, :presence => {:message => "Password can't be blank"}
+
+  has_many(
+  :goals,
+  :class_name => "Goal",
+  :foreign_key => :author_id,
+  :primary_key => :id
+  )
 
   attr_reader :password
 
