@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   :primary_key => :id
   )
 
+  has_many :cheers
+
   attr_reader :password
 
   def self.find_by_credentials(username, password)
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
 
   def is_password?(pass)
     BCrypt::Password.new(self.password_digest).is_password?(pass)
+  end
+
+  def cheers_today
+    self.cheers.select { |cheer| cheer.created_at.today? }.count
   end
 
   private

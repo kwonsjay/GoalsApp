@@ -4,6 +4,23 @@
 	<%= @goal.body %>
 </div>
 
+
+<% if @goal.private %>
+Private
+<% else %>
+<%= "Cheers: #{@goal.cheers.count}" %>
+<% end %>
+
+<% if @goal.author_id != current_user.id %>
+
+	<form action="<%=goal_cheers_url(@goal)%>" method="post" accept-charset="utf-8">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>" id="authenticity_token">
+	<p><input type="submit" value="Cheer"></p>
+	</form>
+
+<% end %>
+
+
 <% if @goal.author_id == current_user.id %>
 	<%= button_to "Edit Goal", edit_goal_url(@goal), :method => :get %>
 	<%= button_to "Delete Goal", goal_url(@goal), :method => :delete %>

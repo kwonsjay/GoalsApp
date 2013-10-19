@@ -9,4 +9,6 @@ class Goal < ActiveRecord::Base
   :primary_key => :id
   )
 
+  has_many :cheers
+
 end

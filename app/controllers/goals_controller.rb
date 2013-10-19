@@ -6,8 +6,6 @@ class GoalsController < ApplicationController
   end
 
   def create
-    # @goal = Goal.new(params[:goal])
-#     @goal.author_id = current_user.id
     @goal = current_user.goals.build(params[:goal])
     if @goal.save
       redirect_to user_url(@goal.author)
@@ -19,6 +17,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    @user_cheer_count = current_user.cheers_today
     render :show
   end
 
